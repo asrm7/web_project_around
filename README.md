@@ -4,4 +4,4 @@ Task Stack
 HTML5
 CSS3
 JavaScript
-Github pages link:
+Github pages link: https://asrm7.github.io/web_project_around/index.html
