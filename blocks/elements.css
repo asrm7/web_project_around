@@ -51,7 +51,8 @@
   overflow: hidden;
 }
 
-.elements__like-button {
+.elements__like-button,
+.elements__delete-button {
   background-color: transparent;
   border: none;
   cursor: pointer;

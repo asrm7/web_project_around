@@ -46,19 +46,23 @@
         <div class="elements">
           <template id="template">
             <div class="elements__card">
+              <button type="button" class="elements__delete-button">
+                <img
+                  class="elements__delete-icon"
+                  src="./images/trash.png"
+                  alt="delete button icon"
+                />
+              </button>
               <img class="elements__card-image" src="#" alt="" />
               <div class="elements__wrapper-text-and-like-button">
                 <p class="elements__card-name"></p>
-                <div class="elements__wrapper-text-and-like-button">
-                  <p class="elements__card-name"></p>
-                  <button type="button" class="elements__like-button">
-                    <img
-                      class="elements__like-icon"
-                      src="./images/like-button.png"
-                      alt="like button icon"
-                    />
-                  </button>
-                </div>
+                <button type="button" class="elements__like-button">
+                  <img
+                    class="elements__like-icon"
+                    src="./images/like-button.png"
+                    alt="like button icon"
+                  />
+                </button>
               </div>
             </div>
           </template>
@@ -82,22 +86,69 @@
               type="text"
               placeholder="Nome"
               value="Jacques Cousteau"
-              required
             />
-
+            <span id="input-name-error" class="popup__form-error"></span>
             <input
               id="input-role"
               class="popup__input"
               type="text"
               placeholder="sobre-mim"
               value="Explorador"
-              required
             />
-
+            <span id="input-role-error" class="popup__form-error"></span>
             <button id="save-button" class="popup__save-button" type="submit">
               Salvar
             </button>
           </form>
+        </div>
+      </div>
+      <div class="popup popup-add-card">
+        <div class="popup__container">
+          <img
+            class="popup__close-button popup-add-card__close-button"
+            src="./images/close-icon.png"
+            alt="Botão de fechar o popup"
+          />
+          <h2 class="popup__title">Novo local</h2>
+          <form class="popup__form popup__add-card-form">
+            <input
+              id="input-location-name"
+              class="popup__input"
+              type="text"
+              placeholder="Titulo"
+            />
+            <span
+              id="input-location-name-error"
+              class="popup__form-error"
+            ></span>
+            <input
+              id="input-image"
+              class="popup__input"
+              type="text"
+              placeholder="Link da imagem"
+            />
+            <span id="input-image-error" class="popup__form-error"></span>
+            <button
+              id="create-button"
+              class="popup__save-button popup-add-card__create-button"
+              type="submit"
+            >
+              Criar
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="popup popup-view-image">
+        <div class="popup__container popup-view-image__image-container">
+          <img
+            class="popup__close-button popup-view-image__close-button"
+            src="./images/close-icon.png"
+            alt="Botão de fechar o popup"
+          />
+          <div class="popup-view-image__image-container">
+            <img class="popup-view-image__render-image" src="#" alt="#" />
+            <span class="popup-view-image__image-title"></span>
+          </div>
         </div>
       </div>
     </div>
