@@ -71,6 +71,7 @@
   width: 100%;
   height: 50px;
   max-width: 150px;
+  cursor: pointer;
   background-color: transparent;
   border: 1px solid #ffffff;
 }
