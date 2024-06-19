@@ -76,7 +76,7 @@ initialCards.forEach((card, index) => {
 });
 
 // popupAddCardOpenAndCloseButton
-const addCardButton = document.querySelector(".profile__add-card-icon");
+const addCardButton = document.querySelector(".profile__add-card-button");
 const popupAddCards = document.querySelector(".popup-add-card");
 const closePopupAddCardButton = document.querySelector(
   ".popup-add-card__close-button"
