@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="./favicon-road.ico" />
   </head>
   <body>
+    <div id="cover"></div>
     <div class="page">
       <header class="header">
         <img
@@ -20,6 +21,7 @@
         />
       </header>
       <main>
+        <!-- shown selected profile -->
         <section class="profile">
           <div class="profile__container">
             <img
@@ -42,7 +44,7 @@
           </div>
         </section>
         <div class="elements"></div>
-        <!-- ________________ POPUP Perfil ________________ -->
+        <!-- ________________ POPUP edit Profile ________________ -->
 
         <div class="popup" id="popup-profile">
           <div class="popup__overlay"></div>
@@ -87,7 +89,7 @@
             </fieldset>
           </form>
         </div>
-        <!-- ________________ Pop Up + ________________ -->
+        <!-- ________________ PopUp add new cards ________________ -->
         <div class="popup" id="popup-add">
           <div class="popup__overlay"></div>
 
@@ -104,7 +106,7 @@
                 type="text"
                 class="popup__input"
                 id="input-img"
-                name="img"
+                name="place"
                 placeholder="Titulo"
                 required
                 minlength="2"
@@ -132,7 +134,7 @@
             </fieldset>
           </form>
         </div>
-        <!-- ________________ Pop Up img ________________ -->
+        <!-- ________________ PopUp show full img ________________ -->
         <div class="popup" id="popup-img">
           <div class="popup__overlay"></div>
 
@@ -153,7 +155,7 @@
       </footer>
     </div>
 
-    <!-- ________________ Template  s ________________ -->
+    <!-- ________________ Template form  ________________ -->
     <template class="template__elements">
       <div class="elements__container">
         <img class="elements__place-image" src=" " alt=" " />

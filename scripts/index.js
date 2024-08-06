@@ -1,77 +1,73 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
+import Section from "./Section.js";
+import PopupWithForm from "./PopupWithForm.js";
+import PopupWithImage from "./PopupWithImage.js";
 import {
-  openProfile,
   closeAll,
-  saveChanges,
-  openAdd,
   handleEsc,
+  initialCards,
+  
 } from "./utils.js";
-
+import UserInfo from "./UserInfo.js";
 const btnEdit = document.querySelector(".profile__edit");
-const btnCloseProfile = document.querySelector("#close-profile");
 const formProfile = document.querySelector("#profile-form");
 const btnAdd = document.querySelector(".profile__add");
-const btnCloseAdd = document.querySelector("#close-add");
 const elementArea = document.querySelector(".elements");
-const elementNameInput = document.querySelector("#input-img");
-const elementLinkInput = document.querySelector("#input-link");
 const formElements = document.querySelector("#elements-form");
 const popupOverlays = document.querySelectorAll(".popup__overlay");
 
-const initialCards = [
-  {
-    name: "Vale de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-  },
-  {
-    name: "Montanhas Carecas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
-  },
-  {
-    name: "Parque Nacional da Vanoise ",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
-  },
-];
+const userInfo = new UserInfo({
+  name: ".profile__info",
+  title: ".profile__title",
+});
 
-btnEdit.addEventListener("click", openProfile);
-btnCloseProfile.addEventListener("click", closeAll);
-formProfile.addEventListener("submit", saveChanges);
+const popupProfile1 = new PopupWithForm("#popup-profile", (inputs) => {
+  userInfo.setUserInfo( inputs.nome, inputs.title );
+  popupProfile1.close();
+});
 
-btnAdd.addEventListener("click", openAdd);
-btnCloseAdd.addEventListener("click", closeAll);
+
+btnEdit.addEventListener("click", function () {
+  popupProfile1.open();
+});
+
+const popupAddCard = new PopupWithForm("#popup-add", ({ link, place }) => {
+   const popupImage = new PopupWithImage("#popup-img");
+   console.log(place);
+   const cardNode = new Card(place, link, popupImage.handleCardClick);
+   elementArea.prepend(cardNode.generateCard());
+   popupAddCard.close();
+   
+});
+
+btnAdd.addEventListener("click", function () {
+  popupAddCard.open();
+});  
 
 //Inicia cards
-initialCards.forEach(function (card) {
-  const newElement = new Card(card.name, card.link);
-  elementArea.append(newElement.generateCard());
-});
-function addNewCard(evt) {
-  const newElement = new Card(elementNameInput.value, elementLinkInput.value);
-  evt.preventDefault();
-  elementArea.prepend(newElement.generateCard());
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const popupImage = new PopupWithImage("#popup-img");
+      const card = new Card(item.name, item.link, popupImage.handleCardClick);
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+      popupImage.setEventListeners();
+    },
+  },
+  elementArea
+);
+cardList.renderItems();
 
-  closeAll();
-}
-// inicia manipuladores de eventos
-formElements.addEventListener("submit", addNewCard);
+
+
 popupOverlays.forEach((overlay) => {
   overlay.addEventListener("click", closeAll);
   document.removeEventListener("keydown", handleEsc);
 });
-//cria as validacoes
+
 const validateForm1 = new FormValidator(formElements, {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",

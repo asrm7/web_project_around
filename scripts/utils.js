@@ -1,24 +1,54 @@
-const popUpProfile = document.querySelector("#popup-profile");
-const profileNameInput = document.querySelector("#input-name");
-const profileAboutInput = document.querySelector("#input-title");
-const elementLinkInput = document.querySelector("#input-link");
-const elementNameInput = document.querySelector("#input-img");
-const popUpAdd = document.querySelector("#popup-add");
-const popupImg = document.querySelector("#popup-img");
-const profileName = document.querySelector(".profile__info");
-const profileAbout = document.querySelector(".profile__title");
-const buttonSelector = document.querySelector(".popup__button-create");
-const formProfile = document.querySelectorAll(".popup__error");
-const inputSelector = document.querySelectorAll(".popup__input");
+export const popUpProfile = document.querySelector("#popup-profile");
+export const profileNameInput = document.querySelector("#input-name");
+export const profileAboutInput = document.querySelector("#input-title");
+export const elementLinkInput = document.querySelector("#input-link");
+export const elementNameInput = document.querySelector("#input-img");
+export const popUpAdd = document.querySelector("#popup-add");
+export const popupImg = document.querySelector("#popup-img");
+export const profileName = document.querySelector(".profile__info");
+export const profileAbout = document.querySelector(".profile__title");
+export const buttonSelector = document.querySelector(".popup__button-create");
+export const formProfile = document.querySelectorAll(".popup__error");
+export const inputSelector = document.querySelectorAll(".popup__input");
+
+
+export const initialCards = [
+  {
+    name: "Vale de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+  },
+  {
+    name: "Lago Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+  },
+  {
+    name: "Montanhas Carecas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
+  },
+  {
+    name: "Parque Nacional da Vanoise ",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
+  },
+];
+
+
 
 //open close profile profile                              class="input-title-error popup__error"
-function openProfile() {
+export function openProfile() {
   popUpProfile.classList.toggle("popup__show");
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileAbout.textContent;
   document.addEventListener("keydown", handleEsc);
 }
-function closeAll() {
+export function closeAll() {
   popUpProfile.classList.remove("popup__show");
   elementLinkInput.value = "";
   elementNameInput.value = "";
@@ -36,21 +66,22 @@ function closeAll() {
   });
   buttonSelector.classList.add("popup__button_disabled");
 }
-function handleEsc(evt) {
+export function handleEsc(evt) {
   if (evt.key === "Escape") {
     closeAll();
     console.log("Foi pressionado ESC");
   }
 }
-function saveChanges(evt) {
+export function saveChanges(evt) {
   profileName.textContent = profileNameInput.value;
   profileAbout.textContent = profileAboutInput.value;
   evt.preventDefault();
   closeAll();
 }
-function openAdd() {
+export function openAdd() {
   popUpAdd.classList.add("popup__show");
   document.addEventListener("keydown", handleEsc);
 }
 
-export { openProfile, closeAll, handleEsc, saveChanges, openAdd };
+
+
