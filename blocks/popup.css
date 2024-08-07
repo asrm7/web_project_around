@@ -14,6 +14,10 @@
 
 .popup__show {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
 }
 .popup__overlay {
   background-color: rgba(0, 0, 0, 0.5);
@@ -84,15 +88,15 @@
 }
 
 .popup__title {
-  width: 330px;
-  height: 23px;
+  
+  
   font-family: "Inter";
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
   color: #000000;
-  margin: 35px auto 0 35px;
+  margin: 0 0 54px;
 }
 
 .popup__input {
