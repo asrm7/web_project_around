@@ -13,7 +13,7 @@ import {
   btnAdd,
   elementArea,
   formElements,
-  popupOverlays
+  popups
   
 } from "./scripts/utils.js";
 import UserInfo from "./scripts/UserInfo.js";
@@ -64,10 +64,7 @@ cardList.renderItems();
 
 
 
-popupOverlays.forEach((overlay) => {
-  overlay.addEventListener("click", closeAll);
-  document.removeEventListener("keydown", handleEsc);
-});
+
 
 const validateForm1 = new FormValidator(formElements, {
   formSelector: ".popup__form",

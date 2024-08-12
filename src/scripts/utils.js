@@ -8,14 +8,14 @@ export const popupImg = document.querySelector("#popup-img");
 export const profileName = document.querySelector(".profile__info");
 export const profileAbout = document.querySelector(".profile__title");
 export const buttonSelector = document.querySelector(".popup__button-create");
-// export const formProfile = document.querySelectorAll(".popup__error");
+
 export const inputSelector = document.querySelectorAll(".popup__input");
 export const btnEdit = document.querySelector(".profile__edit");
 export const formProfile = document.querySelector("#profile-form");
 export const btnAdd = document.querySelector(".profile__add");
 export const elementArea = document.querySelector(".elements");
 export const formElements = document.querySelector("#elements-form");
-export const popupOverlays = document.querySelectorAll(".popup__overlay");
+export const popups = document.querySelectorAll(".popup");
 
 
 
@@ -62,11 +62,7 @@ export function closeAll() {
   popUpAdd.classList.remove("popup__show");
   popupImg.classList.remove("popup__show");
   document.removeEventListener("keydown", handleEsc);
-  formProfile.forEach(function (el) {
-    el.textContent = "";
-    el.classList.remove("popup__error_visible");
-    el.classList.remove("popup__input_type_error");
-  });
+  
   inputSelector.forEach(function (el) {
     el.classList.remove("popup__error_visible");
     el.classList.remove("popup__input_type_error");
