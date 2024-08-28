@@ -23,7 +23,6 @@
 }
 .elements__info {
   display: flex;
-  justify-content: space-between;
   height: 79px;
   margin: 0 auto;
 }
@@ -75,6 +74,19 @@
 .elements__delete:hover {
   opacity: 0.6;
   cursor: pointer;
+}
+.elements__likes-number {
+
+  position: absolute;
+  align-self: flex-end; 
+  
+  border: none;
+  width: 21px;
+  height: 19px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  margin-left: 253px;
+  
 }
 
 @media screen and (max-width: 880px) {

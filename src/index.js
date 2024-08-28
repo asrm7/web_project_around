@@ -1,3 +1,4 @@
+import Api from "./scripts/api.js";
 import "./pages/index.css";
 import { Card } from "./scripts/Card.js";
 import { FormValidator } from "./scripts/FormValidator.js";
@@ -17,52 +18,114 @@ import {
   
 } from "./scripts/utils.js";
 import UserInfo from "./scripts/UserInfo.js";
+import PopupWithConfirmation from "./scripts/PopupWithConfirmation.js";
 
 const userInfo = new UserInfo({
   name: ".profile__info",
-  title: ".profile__title",
+  about: ".profile__title",
+  avatar: ".profile__avatar",
 });
 
-const popupProfile1 = new PopupWithForm("#popup-profile", (inputs) => {
-  userInfo.setUserInfo( inputs.nome, inputs.title );
-  popupProfile1.close();
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/web-ptbr-cohort-12",
+  headers: {
+    authorization: " 55878f5d-532c-423a-a4a7-6c74dc5acc4e",
+    "Content-Type": "application/json",
+  },
 });
+
+api.getUserInfo().then((result) => {
+  userInfo.setUserInfo(result);
+
+  api.getInitialCards().then((result) => {
+    const cardList = new Section(
+      {
+        items: result,
+        renderer: (item) => {
+          const cards = new Card(
+            item,
+
+            () => {
+              popupPicture.open(item.link, item.name);
+            },
+            userInfo._userId,
+            () => {
+              popupWithConfirmation.open(item._id);
+            },
+            () => api.addLike(item._id),
+            () => api.removeLike(item._id)
+          );
+          const cardElement = cards.generateCard();
+
+          cardList.addItem(cardElement);
+        },
+      },
+      elementArea
+    );
+
+    cardList.renderItems();
+  });
+});
+
+const popupAddCard = new PopupWithForm("#popup-add", (input) => {
+  api.addcards(input).then((result) => {
+    const newCard = new Card(
+      result,
+      () => {
+        popupPicture.open(result.link, result.name);
+      },
+
+      userInfo._userId,
+      () => {
+        api.deleteCard(result._id);
+        
+      },
+
+      (cardId) => api.addLike(cardId),
+      (cardId) => api.removeLike(cardId)
+    );
+    const newCardElement = newCard.generateCard();
+    cardArea.prepend(newCardElement);
+    popupAddCard.close();
+  });
+});
+popupAddCard.setEventListeners();
+
+
+const popupProfile1 = new PopupWithForm("#popup-profile", (inputs) => {
+  api.editProfile(inputs).then((result) => {
+    userInfo.setUserInfo(result);
+    popupProfile1.close();
+  });
+});
+popupProfile1.setEventListeners();
+
+
+const popupPicture = new PopupWithImage("#popup-img");
+popupPicture.setEventListeners();
+
+const popupWithConfirmation = new PopupWithConfirmation(
+  "#popup-delete-confirmation",
+  (cardToDelete) => {
+    api.deleteCard(cardToDelete).then(() => {
+      popupWithConfirmation.close();
+      const card = document.querySelector(`#id_${cardToDelete}`);
+      card.remove();
+    });
+  }
+);
+popupWithConfirmation.setEventListeners();
 
 
 btnEdit.addEventListener("click", function () {
   popupProfile1.open();
+  popupProfile1.getUserInfo;
+  validateForm1.enableValidation();
+  
 });
-
-const popupAddCard = new PopupWithForm("#popup-add", ({ link, place }) => {
-   const popupImage = new PopupWithImage("#popup-img");
-   console.log(place);
-   const cardNode = new Card(place, link, popupImage.handleCardClick);
-   elementArea.prepend(cardNode.generateCard());
-   popupAddCard.close();
-   
-});
-
 btnAdd.addEventListener("click", function () {
   popupAddCard.open();
 });  
-
-//Inicia cards
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const popupImage = new PopupWithImage("#popup-img");
-      const card = new Card(item.name, item.link, popupImage.handleCardClick);
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
-      popupImage.setEventListeners();
-    },
-  },
-  elementArea
-);
-cardList.renderItems();
-
-
 
 
 

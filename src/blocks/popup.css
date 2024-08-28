@@ -121,9 +121,9 @@
 }
 
 .popup__button {
-  width: 328px;
+  width: 358px;
   height: 50px;
-  margin: 30px auto 10px;
+  margin: 20px auto 10px;
   background-color: #000;
   font-family: "Inter";
   font-style: normal;
@@ -147,6 +147,32 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.popup__form-confirmation {
+  gap: 0px;
+  border-radius: 10px ;
+  opacity: 0px;
+  width: 430px;
+  height: 181px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: white;
+  background: #ffffff;
+  position: fixed;
+  z-index: 2;
+}
+.popup__message{
+  align-self: flex-start;
+  font-family: "Inter";
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29.05px;
+  text-align: left;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-bottom: 0;
 }
 
 @media screen and (max-width: 880px) {

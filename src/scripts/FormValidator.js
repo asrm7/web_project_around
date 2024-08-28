@@ -13,6 +13,7 @@ export class FormValidator {
     this.inputList = Array.from(
       this.formElement.querySelectorAll(this.inputSelector)
     );
+    this._toggleButtonState();
   }
 
   _showInputError(inputElement) {

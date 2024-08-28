@@ -56,7 +56,7 @@
                 type="text"
                 class="popup__input"
                 id="input-name"
-                name="nome"
+                name="name"
                 placeholder="Nome"
                 required
                 minlength="2"
@@ -69,7 +69,7 @@
                 type="text"
                 class="popup__input"
                 id="input-title"
-                name="title"
+                name="about"
                 placeholder="Sobre mim"
                 required
                 minlength="2"
@@ -91,7 +91,7 @@
           <form class="popup__form" id="elements-form">
             <img
               src="<%=require('./images/CloseIcon.svg')%>"
-              alt="cerrar"
+              alt="Encerrar"
               class="popup__close-button"
               id="close-add"
             />
@@ -136,7 +136,7 @@
           <form class="popup__form popup__image" id="img-form">
             <img
               src="<%=require('./images/CloseIcon.svg')%>"
-              alt="cerrar"
+              alt="Encerrar"
               class="popup__close-button"
               id="close-img"
             />
@@ -158,10 +158,51 @@
         <div class="elements__info">
           <h3 class="elements__text"></h3>
           <button class="elements__like"></button>
+          <span class="elements__likes-number"></span>
         </div>
       </div>
     </template>
+    
+    <!--Confirmation PopUp-->
+    <section class="popup " id="popup-delete-confirmation">
+      <div class="popup__overlay"></div>
+      <div class="popup__container popup__form-confirmation">
+        <form name="delete-confirmation-form" class="popup__form-confirmation">
+          <img
+            src="<%=require ('./images/CloseIcon.svg')%>"
+            alt="Encerrar"
+            class="popup__close-button"
+          />
+          <h2 class="popup__title popup__message">Tem certeza?</h2>
+          <button type="submit" value="submit" class="popup__button">Sim</button>
+        </form>
+      </div>
+    </section>
 
+    <!--Avatar PopUp-->
+    <section class="popup" id="popup-avatar-profile">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <form id="profile-avatar-form" class="popup__form">
+          <img
+            src="<%=require ('./images/CloseIcon.svg')%>"
+            alt="Encerrar"
+            class="popup__close-button"
+          />
+          <h2 class="popup__header">Trocar foto de perfil</h2>
+          <input
+            type="url"
+            class="popup__input"
+            id="avatar-link"
+            name="avatarLink"
+            placeholder="Link da imagem"
+            required
+          />
+          <span class="popup__error-visible avatar-link-error"></span>
+          <button type="submit" value="submit" class="popup__btn"></button>
+        </form>
+      </div>
+    </section>
     
   </body>
 </html>
