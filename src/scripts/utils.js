@@ -16,6 +16,8 @@ export const btnAdd = document.querySelector(".profile__add");
 export const elementArea = document.querySelector(".elements");
 export const formElements = document.querySelector("#elements-form");
 export const popups = document.querySelectorAll(".popup");
+export const avatarBtn = document.querySelector("#profile__avatar-edit");
+export const formAvatar = document.querySelector("#profile-avatar-form");
 
 
 

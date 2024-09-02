@@ -12,13 +12,15 @@ export default class UserInfo {
     };
   }
   setUserInfo(data) {
-    this._name.textContent = data.name;
-    this._title.textContent = data.about;
-    if (data.avatar) {
-      this._avatar.src = data.avatar;
-    }
-    if (data._id) {
-      this._userId = data._id;
+    if (data){
+      this._name.textContent = data.name;
+      this._title.textContent = data.about;
+      if (data.avatar) {
+        this._avatar.src = data.avatar;
+      }
+      if (data._id) {
+        this._userId = data._id;
+      }
     }
   }
 }

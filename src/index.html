@@ -24,6 +24,14 @@
               alt="imagen de perfil"
               class="profile__avatar"
             />
+            
+              <img
+                src="<%= require('./images/Vector.png')%>"
+                alt=""
+                class="profile__avatar-edit"
+                id="profile__avatar-edit"
+              />
+            
             <h1 class="profile__info">Jacques Cousteau</h1>
             <h2 class="profile__title">Explorador</h2>
             <img
@@ -78,7 +86,7 @@
               <span class="input-title-error popup__error"
                 >Por favor, preencha este campo.</span
               >
-              <button class="popup__button popup__button-save popup__button_disabled" type="submit">
+              <button class="popup__button popup__button-save popup__button_disabled" type="submit" id="profile-button">
                 Salvar
               </button>
             </fieldset>
@@ -88,7 +96,7 @@
         <div class="popup" id="popup-add">
           <div class="popup__overlay"></div>
 
-          <form class="popup__form" id="elements-form">
+          <form class="popup__form" id="elements-form" novalidate>
             <img
               src="<%=require('./images/CloseIcon.svg')%>"
               alt="Encerrar"
@@ -123,10 +131,37 @@
               <button
                 class="popup__button popup__button-create popup__button_disabled"
                 type="submit"
+                id="addcard-button"
               >
                 Criar
               </button>
             </fieldset>
+          </form>
+        </div>
+        <!--Avatar PopUp-->
+        <div class="popup" id="popup-avatar-profile">
+          <div class="popup__overlay"></div>
+          <form class="popup__form" id="profile-avatar-form" novalidate>
+            <img
+              src="<%=require ('./images/CloseIcon.svg')%>"
+              alt="Encerrar"
+              class="popup__close-button"
+              id="close-avatar"
+            />
+            <fieldset class="popup__fieldset">
+              <h2 class="popup__title">Alterar a foto do perfil</h2>
+              <input
+                type="url"
+                class="popup__input"
+                id="input-link"
+                name="avatarLink"
+                placeholder="Link da imagem"
+                required
+              />
+              <span class="input-link-error popup__error" >Por favor, introduza um endereço da web.</span>
+              <button type="submit" value="submit" class="popup__button popup__button-save">Salvar</button>
+            </fieldset>
+            
           </form>
         </div>
         <!-- ________________ PopUp show full img ________________ -->
@@ -144,65 +179,38 @@
             <p class="popup__footer"></p>
           </form>
         </div>
+        <!--Confirmation PopUp-->
+        <div class="popup" id="popup-delete-confirmation">
+          <div class="popup__overlay"></div>
+          <div class="popup__container popup__form-confirmation">
+            <form name="delete-confirmation-form" class="popup__form-confirmation">
+              <img
+                src="<%=require ('./images/CloseIcon.svg')%>"
+                alt="Encerrar"
+                class="popup__close-button"
+              />
+              <h2 class="popup__title popup__message">Tem certeza?</h2>
+              <button type="submit" value="submit" class="popup__button">Sim</button>
+            </form>
+          </div>
+        </div>
+        
+        <!-- ________________ Template form  ________________ -->
+        <template class="template__elements">
+          <div class="elements__container">
+            <img class="elements__place-image" src=" " alt=" " />
+            <button class="elements__delete"></button>
+            <div class="elements__info">
+              <h3 class="elements__text"></h3>
+              <button class="elements__like"></button>
+              <span class="elements__likes-number"></span>
+            </div>
+          </div>
+        </template>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2021 Around The U.S.</p>
       </footer>
     </div>
-
-    <!-- ________________ Template form  ________________ -->
-    <template class="template__elements">
-      <div class="elements__container">
-        <img class="elements__place-image" src=" " alt=" " />
-        <button class="elements__delete"></button>
-        <div class="elements__info">
-          <h3 class="elements__text"></h3>
-          <button class="elements__like"></button>
-          <span class="elements__likes-number"></span>
-        </div>
-      </div>
-    </template>
-    
-    <!--Confirmation PopUp-->
-    <section class="popup " id="popup-delete-confirmation">
-      <div class="popup__overlay"></div>
-      <div class="popup__container popup__form-confirmation">
-        <form name="delete-confirmation-form" class="popup__form-confirmation">
-          <img
-            src="<%=require ('./images/CloseIcon.svg')%>"
-            alt="Encerrar"
-            class="popup__close-button"
-          />
-          <h2 class="popup__title popup__message">Tem certeza?</h2>
-          <button type="submit" value="submit" class="popup__button">Sim</button>
-        </form>
-      </div>
-    </section>
-
-    <!--Avatar PopUp-->
-    <section class="popup" id="popup-avatar-profile">
-      <div class="popup__overlay"></div>
-      <div class="popup__container">
-        <form id="profile-avatar-form" class="popup__form">
-          <img
-            src="<%=require ('./images/CloseIcon.svg')%>"
-            alt="Encerrar"
-            class="popup__close-button"
-          />
-          <h2 class="popup__header">Trocar foto de perfil</h2>
-          <input
-            type="url"
-            class="popup__input"
-            id="avatar-link"
-            name="avatarLink"
-            placeholder="Link da imagem"
-            required
-          />
-          <span class="popup__error-visible avatar-link-error"></span>
-          <button type="submit" value="submit" class="popup__btn"></button>
-        </form>
-      </div>
-    </section>
-    
   </body>
 </html>

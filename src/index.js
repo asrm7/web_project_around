@@ -14,7 +14,9 @@ import {
   btnAdd,
   elementArea,
   formElements,
-  popups
+  popups,
+  avatarBtn,
+  formAvatar,
   
 } from "./scripts/utils.js";
 import UserInfo from "./scripts/UserInfo.js";
@@ -26,6 +28,8 @@ const userInfo = new UserInfo({
   avatar: ".profile__avatar",
 });
 
+
+
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/web-ptbr-cohort-12",
   headers: {
@@ -34,6 +38,7 @@ const api = new Api({
   },
 });
 
+//Initial cards logic
 api.getUserInfo().then((result) => {
   userInfo.setUserInfo(result);
 
@@ -46,7 +51,7 @@ api.getUserInfo().then((result) => {
             item,
 
             () => {
-              popupPicture.open(item.link, item.name);
+              popupPicture.handleCardClick(item.name, item.link);
             },
             userInfo._userId,
             () => {
@@ -67,31 +72,36 @@ api.getUserInfo().then((result) => {
   });
 });
 
+// Add cards logic
 const popupAddCard = new PopupWithForm("#popup-add", (input) => {
-  api.addcards(input).then((result) => {
-    const newCard = new Card(
-      result,
-      () => {
-        popupPicture.open(result.link, result.name);
-      },
-
-      userInfo._userId,
-      () => {
-        api.deleteCard(result._id);
-        
-      },
-
-      (cardId) => api.addLike(cardId),
-      (cardId) => api.removeLike(cardId)
-    );
-    const newCardElement = newCard.generateCard();
-    cardArea.prepend(newCardElement);
-    popupAddCard.close();
-  });
+  console.log(input);
+  if (input.link){
+    api.addcards(input).then((result) => {
+      const newCard = new Card(
+        result,
+        () => {
+          popupPicture.handleCardClick(item.name, item.link);
+        },
+  
+        userInfo._userId,
+        () => {
+          popupWithConfirmation.open(result._id);
+                    
+        },
+  
+        (cardId) => api.addLike(cardId),
+        (cardId) => api.removeLike(cardId)
+      );
+      const newCardElement = newCard.generateCard();
+      elementArea.prepend(newCardElement);
+      popupAddCard.close();
+    });
+  }
+  
 });
 popupAddCard.setEventListeners();
 
-
+//popup profile
 const popupProfile1 = new PopupWithForm("#popup-profile", (inputs) => {
   api.editProfile(inputs).then((result) => {
     userInfo.setUserInfo(result);
@@ -100,35 +110,57 @@ const popupProfile1 = new PopupWithForm("#popup-profile", (inputs) => {
 });
 popupProfile1.setEventListeners();
 
+//popup Avatar
+const popupAvatarProfile = new PopupWithForm(
+  "#popup-avatar-profile",
+  (inputs) => {
+    api.editAvatarProfile(inputs).then((result) => {
+      userInfo.setUserInfo(result);
+      popupAvatarProfile.close();
+    });
+  }
+);
+popupAvatarProfile.setEventListeners();
 
+
+//popup image
 const popupPicture = new PopupWithImage("#popup-img");
 popupPicture.setEventListeners();
 
+//popup confirmation
 const popupWithConfirmation = new PopupWithConfirmation(
   "#popup-delete-confirmation",
   (cardToDelete) => {
     api.deleteCard(cardToDelete).then(() => {
       popupWithConfirmation.close();
       const card = document.querySelector(`#id_${cardToDelete}`);
-      card.remove();
+      if (card){
+        card.remove();
+      }
     });
   }
 );
 popupWithConfirmation.setEventListeners();
 
-
+// Eventlistener of edit button
 btnEdit.addEventListener("click", function () {
   popupProfile1.open();
   popupProfile1.getUserInfo;
   validateForm1.enableValidation();
   
 });
+// Eventlistener of avatar button
+avatarBtn.addEventListener("click", function () {
+  popupAvatarProfile.open();
+});
+
+// Eventlistener of Add button
 btnAdd.addEventListener("click", function () {
   popupAddCard.open();
 });  
 
 
-
+//Validation of forms
 const validateForm1 = new FormValidator(formElements, {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
@@ -147,3 +179,14 @@ const validateForm2 = new FormValidator(formProfile, {
 });
 validateForm1.enableValidation();
 validateForm2.enableValidation();
+
+const avatarFormValidation = new FormValidator(formAvatar, {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+});
+  
+avatarFormValidation.enableValidation();
