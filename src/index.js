@@ -99,7 +99,6 @@ const popupAddCard = new PopupWithForm("#popup-add", (input) => {
   }
   
 });
-popupAddCard.setEventListeners();
 
 //popup profile
 const popupProfile1 = new PopupWithForm("#popup-profile", (inputs) => {
@@ -177,9 +176,6 @@ const validateForm2 = new FormValidator(formProfile, {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible",
 });
-validateForm1.enableValidation();
-validateForm2.enableValidation();
-
 const avatarFormValidation = new FormValidator(formAvatar, {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
@@ -188,5 +184,6 @@ const avatarFormValidation = new FormValidator(formAvatar, {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible",
 });
-  
+validateForm1.enableValidation();
+validateForm2.enableValidation();
 avatarFormValidation.enableValidation();
